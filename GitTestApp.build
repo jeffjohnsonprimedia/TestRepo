@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<project name="YourProjectName" default="default">
+  <!--  
+
+    Build configurations:  
+
+    Local        - For local builds/testing  
+
+    Testing    - Teamcity deploy to development server  
+
+    Staging - Teamcity deploy to staging server  
+
+    Live        - Teamcity deploy to live servers  
+
+    -->
+  <property name="solutionFilename"
+  value="${project::get-name()}.sln" />
+  <!-- This is the source folder. i.e. set this to the folder containing the output of the build -->
+  <property name="msBuildOutputFolder" value="Website" />
+  <!-- manual targets to override above default -->
+  <target name="local">
+    <property name="deployTarget" value="local" />
+  </target>
+  <target name="testing">
+    <property name="deployTarget" value="testing" />
+  </target>
+  <target name="staging">
+    <property name="deployTarget" value="staging" />
+  </target>
+  <target name="live">
+    <property name="deployTarget" value="live" />
+  </target>
+  <target name="setEnvironmentalProperties">
+    <!-- Set deployment target to local if not explictly specified -->
+    <if test="${not property::exists('deployTarget')}">
+      <fail message="Must specify valid build target." />
+    </if>
+    <call target="setEnvironmentalPropertiesLocal"
+    if="${deployTarget=='local'}" />
+    <call target="setEnvironmentalPropertiesTesting"
+    if="${deployTarget=='testing'}" />
+    <call target="setEnvironmentalPropertiesStaging"
+    if="${deployTarget=='staging'}" />
+    <call target="setEnvironmentalPropertiesLive"
+    if="${deployTarget=='live'}" />
+  </target>
+  <target name="setEnvironmentalPropertiesLocal">
+    <!-- Web config settings -->
+    <property name="deploymentOverridesSource"
+    value="DeploymentOverrides/Local" />
+    <!-- This is the destination git repository used to hold successful builds -->
+    <property name="gitRepository"
+    value="SuccessfulBuilds/Local" />
+  </target>
+  <target name="setEnvironmentalPropertiesTesting">
+    <!-- Web config settings -->
+    <property name="deploymentOverridesSource"
+    value="DeploymentOverrides/Testing" />
+    <!-- This is the destination git repository used to hold successful builds -->
+    <property name="gitRepository"
+    value="F:/GitRepositories/Testing/MyWebsite" />
+  </target>
+  <target name="setEnvironmentalPropertiesStaging">
+    <!-- Web config settings -->
+    <property name="deploymentOverridesSource"
+    value="DeploymentOverrides/Staging" />
+    <!-- This is the destination git repository used to hold successful builds -->
+    <property name="gitRepository"
+    value="F:/GitRepositories/Staging/MyWebsite" />
+  </target>
+  <target name="setEnvironmentalPropertiesLive">
+    <!-- Web config settings -->
+    <property name="deploymentOverridesSource"
+    value="DeploymentOverrides/Live" />
+    <!-- This is the destination git repository used to hold successful builds -->
+    <property name="gitRepository"
+    value="F:/GitRepositories/Live/MyWebsite" />
+  </target>
+  <target name="default" depends="compile" />
+  <target name="compile">
+    <msbuild project="${solutionFilename}">
+      <property name="Configuration" value="Release" />
+    </msbuild>
+  </target>
+  <target name="deploy" depends="compile, addToGit" />
+  <target name="updateSettings"
+  depends="setEnvironmentalProperties">
+    <!-- Copy config files for this build configuration over the output from the build -->
+    <copy todir="${gitRepository}" overwrite="true">
+      <fileset defaultexcludes="false"
+      basedir="${deploymentOverridesSource}">
+        <include name="**/*" />
+        <exclude name=".do-not-delete" />
+      </fileset>
+    </copy>
+  </target>
+  <!-- ************************************************************** -->
+  <!-- *** Tasks to add successful build output to git repository *** -->
+  <!-- ************************************************************** -->
+  <target name="copyBuildOutputToGit"
+  depends="setEnvironmentalProperties">
+    <!-- Delete entire working folder from git leaving only the main .git folder behind -->
+    <delete>
+      <fileset defaultexcludes="false" basedir="${gitRepository}">
+        <include name="**/*" />
+        <exclude name=".git" />
+        <exclude name=".git/**" />
+      </fileset>
+    </delete>
+    <!-- Copy entire output of successful build into the git working folder -->
+    <copy todir="${gitRepository}">
+      <fileset defaultexcludes="false"
+      basedir="${msBuildOutputFolder}">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+  </target>
+  <target name="addToGit"
+  depends="setEnvironmentalProperties, copyBuildOutputToGit, updateSettings">
+
+    <!-- Commit the contents of the working folder to the git repository -->
+    <!-- Write timestamp of build into a file. Useful for reference but also ensures there is always  
+
+       a change to commit. This way if commit fails we know there was actually an error.  
+
+       (git commit fails if the index is empty)  
+
+   -->
+    <tstamp />
+    <echo message="NAnt build successful at ${tstamp.now}"
+    file="${gitRepository}/build.log" append="false" />
+    <!-- This check is necessary so that we don't inadvertently end up checking in files  
+
+  to the source code repository if the build repository doesn't exist! -->
+    <if test="${not directory::exists(gitRepository + '/.git')}">
+      <fail message="Git repository for build output is not initalised!" />
+    </if>
+    <!-- Stage files to git index -->
+    <exec append="true" workingdir="${gitRepository}"
+    program="git">
+      <arg value="add" />
+      <arg path="${gitRepository}/." />
+    </exec>
+    <!-- Commit files -->
+    <exec append="true" workingdir="${gitRepository}"
+    program="git">
+      <arg line="commit" />
+      <arg value="-a" />
+      <arg value="-m" />
+      <arg value="Successful build: ${tstamp.now}" />
+    </exec>
+    <!-- Update server info (for HTTP repositories) -->
+    <exec append="true" workingdir="${gitRepository}"
+    program="git">
+      <arg line="update-server-info" />
+    </exec>
+  </target>
+</project>
