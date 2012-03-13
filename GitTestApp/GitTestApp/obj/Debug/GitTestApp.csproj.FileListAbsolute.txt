@@ -1,0 +1,7 @@
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\bin\GitTestApp.dll
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\bin\GitTestApp.pdb
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\bin\EntityFramework.dll
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\bin\EntityFramework.xml
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\obj\Debug\ResolveAssemblyReference.cache
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\obj\Debug\GitTestApp.dll
+C:\GitTest\TestRepo\GitTestApp\GitTestApp\obj\Debug\GitTestApp.pdb
