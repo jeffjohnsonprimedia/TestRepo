@@ -10,7 +10,7 @@ namespace GitTestApp.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC A test app for Git Hub!";
+            ViewBag.Message = "Welcome to ASP.NET MVC A test app for Git Hub integrating with Cruise Control!";
 
             return View();
         }
