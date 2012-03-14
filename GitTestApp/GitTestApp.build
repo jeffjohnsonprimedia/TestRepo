@@ -93,7 +93,7 @@
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="pull" />
     </exec>
-  </target>
+
   
 	<!-- Push file -->
 	<echo message="push to git repo" />
