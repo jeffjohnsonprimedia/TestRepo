@@ -55,7 +55,7 @@
 	
 	<!-- Stage files to git index -->
 	<echo message="Add the file to git repo" />
-	<echo message="Add the file to git repo" append="true" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
+	<echo message="Add the file to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg value="add" />
 	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" />
@@ -64,7 +64,7 @@
 	
 	<!-- Commit files -->
 	<echo message="Commit to git repo" />
-	<echo message="Commit to git repo" append="true" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
+	<echo message="Commit to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="commit" />
       <arg value="-m" />
@@ -73,14 +73,14 @@
 	
 	<!-- Update server info (for HTTP repositories) -->
 	<echo message="update server info to git repo" />
-	<echo message="update server info to git repo" append="true" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log" />
+	<echo message="update server info to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log" />
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="update-server-info" />
     </exec>
 	
 	<!-- Push file -->
 	<echo message="push to git repo" />
-	<echo message="push to git repo" append="true" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log" />
+	<echo message="push to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log" />
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="push" />
     </exec>
