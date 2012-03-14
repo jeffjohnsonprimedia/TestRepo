@@ -53,11 +53,20 @@
       <fail message="Git repository for build output is not initalised!" />
     </if>	
 	
+	
+	<!-- git chekcout master -->
+	<echo message="git checkout master" />
+	<echo message="git checkout master" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
+      <arg line="checkout" />
+      <arg value="master" />
+    </exec>
+	
 	<!-- Stage files to git index -->
 	<echo message="Add the file to git repo" />
 	<echo message="Add the file to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
-      <arg value="add" />
+      <arg value="checkout" />
 	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" />
       <arg path="${gitRepository}/." />
     </exec>
@@ -78,6 +87,14 @@
       <arg line="update-server-info" />
     </exec>
 	
+	<!-- pull file -->
+	<echo message="pull from git repo" />
+	<echo message="pull from git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log" />
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
+      <arg line="pull" />
+    </exec>
+  </target>
+  
 	<!-- Push file -->
 	<echo message="push to git repo" />
 	<echo message="push to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log" />
