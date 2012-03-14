@@ -23,28 +23,28 @@
     </if>
 	
 	<!-- Stage files to git index -->
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg value="add" />
       <arg path="${gitRepository}/." />
-    </exec>
+    </exec-->
 	
 	<!-- Commit files -->
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="commit" />
       <arg value="-a" />
       <arg value="-m" />
       <arg value="Successful build: ${tstamp.now}" />
-    </exec>
+    </exec-->
 	
 	<!-- Update server info (for HTTP repositories) -->
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="update-server-info" />
-    </exec>
+    </exec-->
 	
 	<!-- Push file -->
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="push" />
-    </exec>
+    </exec-->
 	
   </target>
 </project>
