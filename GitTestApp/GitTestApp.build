@@ -54,6 +54,7 @@
     </if>	
 	
 	<!-- Stage files to git index -->
+	<echo message="Add the file to git repo" />
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg value="add" />
 	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" />
@@ -61,6 +62,7 @@
     </exec>
 	
 	<!-- Commit files -->
+	<echo message="Commit to git repo" />
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="commit" />
       <arg value="-m" />
@@ -68,11 +70,13 @@
     </exec>
 	
 	<!-- Update server info (for HTTP repositories) -->
-    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+	<echo message="update server info to git repo" />
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="update-server-info" />
-    </exec-->
+    </exec>
 	
 	<!-- Push file -->
+	<echo message="push to git repo" />
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="push" />
     </exec>
