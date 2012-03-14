@@ -5,3 +5,10 @@ C:\GitTest\TestRepo\GitTestApp\GitTestApp\bin\EntityFramework.xml
 C:\GitTest\TestRepo\GitTestApp\GitTestApp\obj\Debug\ResolveAssemblyReference.cache
 C:\GitTest\TestRepo\GitTestApp\GitTestApp\obj\Debug\GitTestApp.dll
 C:\GitTest\TestRepo\GitTestApp\GitTestApp\obj\Debug\GitTestApp.pdb
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.dll
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.pdb
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\EntityFramework.dll
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\EntityFramework.xml
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\obj\Debug\ResolveAssemblyReference.cache
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\obj\Debug\GitTestApp.dll
+C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\obj\Debug\GitTestApp.pdb
