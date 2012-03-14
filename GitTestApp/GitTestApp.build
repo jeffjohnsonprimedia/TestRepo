@@ -55,7 +55,7 @@
 	
 	<!-- Stage files to git index -->
 	<echo message="Add the file to git repo" />
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg value="add" />
 	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" />
       <arg path="${gitRepository}/." />
@@ -63,7 +63,7 @@
 	
 	<!-- Commit files -->
 	<echo message="Commit to git repo" />
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="commit" />
       <arg value="-m" />
       <arg value="Successful build: ${tstamp.now}" />
@@ -71,13 +71,13 @@
 	
 	<!-- Update server info (for HTTP repositories) -->
 	<echo message="update server info to git repo" />
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="update-server-info" />
     </exec>
 	
 	<!-- Push file -->
 	<echo message="push to git repo" />
-    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="push" />
     </exec>
   </target>
