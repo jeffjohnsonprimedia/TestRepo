@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="YourProjectName" default="default">
-  <property name="gitRepository" value="C:\GitTest\TestRepo" />
+  <property name="gitRepository" value="C:\Build\Projects\GitTestApp.Project\" />
   <property name="gitExe" value="C:\Program Files (x86)\Git\bin\git.exe" />
   <!--property name="nant.settings.currentframework" value="net-v4.0"/-->
   
@@ -56,6 +56,7 @@
 	<!-- Stage files to git index -->
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg value="add" />
+	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" />
       <arg path="${gitRepository}/." />
     </exec>
 	
