@@ -10,8 +10,14 @@
        a change to commit. This way if commit fails we know there was actually an error.  
        (git commit fails if the index is empty)  
    -->
+   <target name="build.and.zip">
+    <echo message="Build and Zip"/>    
+    <call target="build"/>
+	<call target="zip-distributable"/>
+	<call target="addToGit" />
+  </target>
    
-   
+  
   <target name="build" description="compiles the source code using msbuild">
     <echo message="JJ's cool echo statement"/>
     <!--echo message="Framework directory: ${nant.settings.currentframework.frameworkdirectory}"/-->
@@ -26,8 +32,17 @@
     </exec>
   </target> 
   
-  <target name="addToGit">
+  <target name="zip-distributable" description="zip up the release">
+    <echo message="Creating zip for the Web Application"/>
+    <zip zipfile="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" >
+      <fileset basedir="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin" failonempty="true">
+        <include name="**/*" />
+        <exclude name="**/externals/*" />
+      </fileset>
+    </zip>
+  </target>
   
+  <target name="addToGit">
     <tstamp />	
 	<echo message="NAnt build successful at ${tstamp.now}" />
 	<echo message="${gitRepository}" />	
@@ -39,18 +54,17 @@
     </if>	
 	
 	<!-- Stage files to git index -->
-    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg value="add" />
       <arg path="${gitRepository}/." />
-    </exec-->
+    </exec>
 	
 	<!-- Commit files -->
-    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="commit" />
-      <arg value="-a" />
       <arg value="-m" />
       <arg value="Successful build: ${tstamp.now}" />
-    </exec-->
+    </exec>
 	
 	<!-- Update server info (for HTTP repositories) -->
     <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
@@ -58,9 +72,9 @@
     </exec-->
 	
 	<!-- Push file -->
-    <!-- exec append="true" workingdir="${gitRepository}" program="${gitExe}">
+    <exec append="true" workingdir="${gitRepository}" program="${gitExe}">
       <arg line="push" />
-    </exec-->
-	
+    </exec>
   </target>
+  
 </project>
