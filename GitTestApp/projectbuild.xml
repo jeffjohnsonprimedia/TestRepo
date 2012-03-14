@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildAndDeploy">
+  <!--<Import Project="C:\Program Files\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>-->
+  <PropertyGroup>
+    <Configuration>Debug</Configuration>
+    <BuildOutputFolder>..\Build</BuildOutputFolder>
+    <ProjectDir></ProjectDir>
+    <CompilationDebug />
+    <CustomErrorsMode />
+    <ContentEditorsEmail />
+    <AdministratorsEmail />
+    <DeploymentLocation />
+  </PropertyGroup>
+
+  <Target Name="BuildAndDeploy">
+    <CallTarget Targets="Clean" />
+    <CallTarget Targets="Compile" />
+  </Target>
+
+  <Target Name="Clean">
+    <Message Text="Removing Directory  $(BuildOutputFolder)" />
+    <Exec Command="RmDir /S $(BuildOutputFolder)" ContinueOnError="true" />
+    <MSBuild Projects=".\$(ProjectName).sln" Targets="Clean" />
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Clean">
+    <Message Text="Build Configuration: $(Configuration)" />
+    <MSBuild Projects=".\$(ProjectName).sln" Properties="OutDir=..\$(BuildOutputFolder)\;Configuration=$(Configuration);BuildingProject=true;IsDesktopBuild=false;" />
+  </Target>
+  
+</Project>
