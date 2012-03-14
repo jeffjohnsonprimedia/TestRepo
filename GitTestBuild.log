@@ -1,0 +1,12 @@
+Add the file to git repo
+
+Commit to git repo
+	[detached HEAD 79f8f52] Successful build: 03/14/2012 16:13:10
+	4 files changed, 8 insertions(+), 0 deletions(-)
+	create mode 100644 GitTestApp/GitTestApp/bin/GitTestApp.zip
+	create mode 100644 GitTestBuild.log
+ 
+update server info to git repo
+
+push to git repo
+	Everything up-to-date
