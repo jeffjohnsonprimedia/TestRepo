@@ -10,3 +10,11 @@ update server info to git repo
 
 push to git repo
 	Everything up-to-date
+git checkout masterSwitched to branch 'master'
+M	GitTestApp/GitTestApp/bin/GitTestApp.dll
+M	GitTestApp/GitTestApp/bin/GitTestApp.pdb
+M	GitTestApp/GitTestApp/obj/Debug/GitTestApp.dll
+M	GitTestApp/GitTestApp/obj/Debug/GitTestApp.pdb
+M	GitTestApp/GitTestApp/obj/Debug/ResolveAssemblyReference.cache
+M	GitTestBuild.log
+Add the file to git repo
