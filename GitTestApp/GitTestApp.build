@@ -34,7 +34,7 @@
   
   <target name="zip-distributable" description="zip up the release">
     <echo message="Creating zip for the Web Application"/>
-    <zip zipfile="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" >
+    <zip zipfile="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp.zip" >
       <fileset basedir="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin" failonempty="true">
         <include name="**/*" />
         <exclude name="**/externals/*" />
@@ -67,7 +67,7 @@
 	<echo message="Add the file to git repo" append="true" file="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log"/>
     <exec append="true" workingdir="${gitRepository}" program="${gitExe}" output="C:\Build\Projects\GitTestApp.Project\GitTestBuild.log">
       <arg line="add" />
-	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp\bin\GitTestApp.zip" />
+	  <arg value="C:\Build\Projects\GitTestApp.Project\GitTestApp\GitTestApp.zip" />
       <arg path="${gitRepository}/." />
     </exec>
 	
