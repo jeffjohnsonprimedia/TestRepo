@@ -31,4 +31,6 @@ M	GitTestApp/GitTestApp/obj/Debug/GitTestApp.dll
 M	GitTestApp/GitTestApp/obj/Debug/GitTestApp.pdb
 M	GitTestApp/GitTestApp/obj/Debug/ResolveAssemblyReference.cache
 M	GitTestBuild.log
+Add the file to git repogit checkout masterSwitched to branch 'master'
+M	GitTestBuild.log
 Add the file to git repo
